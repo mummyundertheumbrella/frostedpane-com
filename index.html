@@ -1,1 +1,201 @@
-placeholder
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frosted Pane Press — Unwrapping 2027</title>
+<meta name="description" content="Frosted Pane Press is coming in 2027. Still under wraps.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eczar:wght@500;700&family=Karla:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /*
+    Division Landing — shared design across six sibling "coming soon" sites.
+    Everything that varies per division is isolated to the custom properties
+    and content below (tint, logo, division name, email). To stand up one of
+    the sibling sites, swap those values and the logo file — the rest of
+    this stylesheet is the shared component.
+  */
+  :root {
+    --tint: #7A2010;
+    --ink: #FFF6E8;
+    --ink-eyebrow: rgba(255, 248, 236, 0.78);
+    --ink-subhead: rgba(255, 246, 232, 0.86);
+    --ink-rule: rgba(255, 246, 232, 0.45);
+    --ink-pill-border: rgba(255, 246, 232, 0.5);
+    --ink-pill-hover-fill: rgba(255, 246, 232, 0.1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #14100c;
+  }
+
+  body {
+    font-family: Karla, system-ui, sans-serif;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .landing {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: var(--tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(28px, 6vw, 96px);
+  }
+
+  /* Background artwork: black linework on cream. The multiply blend is
+     load-bearing — it's what turns the cream into the tint color while
+     keeping the linework black. Do not replace with an opacity overlay. */
+  .landing__artwork {
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/background.png');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Vignette: darkens the edges so cream text holds contrast over the
+     busy linework. */
+  .landing__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 30% 50%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.45) 100%);
+    pointer-events: none;
+  }
+
+  .landing__content {
+    position: relative;
+    width: 100%;
+    max-width: 1180px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(28px, 5vw, 80px);
+  }
+
+  /* Flex-basis floors of 260px / 340px collapse the layout to a single
+     stacked column (logo above text) below ~700px of available width. */
+  .landing__logo-col {
+    flex: 1 1 260px;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .landing__logo {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
+  }
+
+  .landing__text-col {
+    flex: 1 1 340px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(18px, 2.4vw, 30px);
+  }
+
+  .landing__eyebrow {
+    font-family: Karla, system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(11px, 1.1vw, 14px);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--ink-eyebrow);
+  }
+
+  .landing__headline {
+    margin: 0;
+    font-family: Eczar, Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(44px, 8.2vw, 108px);
+    line-height: 0.94;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .landing__rule {
+    width: clamp(64px, 12vw, 140px);
+    height: 2px;
+    background: var(--ink-rule);
+  }
+
+  .landing__subhead {
+    margin: 0;
+    max-width: 34ch;
+    font-family: Karla, system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(15px, 1.5vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-subhead);
+    text-wrap: pretty;
+  }
+
+  .landing__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 14px 22px;
+    border: 1.5px solid var(--ink-pill-border);
+    border-radius: 999px;
+    font-size: clamp(14px, 1.3vw, 16px);
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 150ms, background 150ms;
+  }
+
+  .landing__contact:hover {
+    border-color: var(--ink);
+    background: var(--ink-pill-hover-fill);
+  }
+</style>
+</head>
+<body>
+
+<section class="landing">
+  <div class="landing__artwork"></div>
+  <div class="landing__vignette"></div>
+
+  <div class="landing__content">
+    <div class="landing__logo-col">
+      <img class="landing__logo" src="assets/frosted-pane-press.png" alt="Frosted Pane Press">
+    </div>
+
+    <div class="landing__text-col">
+      <div class="landing__eyebrow">Frosted Pane Press</div>
+
+      <h1 class="landing__headline">Unwrapping<br>2027</h1>
+
+      <div class="landing__rule"></div>
+
+      <p class="landing__subhead">Still under wraps. See you next year.</p>
+
+      <a class="landing__contact" href="mailto:contact@frostedpane.com">contact@frostedpane.com</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
