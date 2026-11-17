@@ -170,6 +170,20 @@
     border-color: var(--ink);
     background: var(--ink-pill-hover-fill);
   }
+
+  .landing__resources {
+    font-size: clamp(13px, 1.2vw, 15px);
+    letter-spacing: 0.04em;
+    color: var(--ink-subhead);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-rule);
+    padding-bottom: 2px;
+  }
+
+  .landing__resources:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
 </style>
 </head>
 <body>
@@ -193,6 +207,8 @@
       <p class="landing__subhead">Still under wraps. See you in 2027.</p>
 
       <a class="landing__contact" href="mailto:contact@frostedpane.com">contact@frostedpane.com</a>
+
+      <a class="landing__resources" href="/resources/">In the meantime, resources are open →</a>
     </div>
   </div>
 </section>

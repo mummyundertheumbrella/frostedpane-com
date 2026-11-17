@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resources — Frosted Pane Press</title>
+<meta name="description" content="Tools, services and advice for independent authors, recommended by working writers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eczar:wght@500;700&family=Karla:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /*
+    Division resources page — shared template for the six division sites.
+    Per-division values live in :root (tint, art bg) and in the two image
+    files (scene.jpg = 2:1 scene, shelf.webp = repeating border strip).
+  */
+  :root{
+    --tint:#7A2010;
+    --artbg:#1E0805;
+    --ink:#FFF6E8;
+    --ink-dim:rgba(255,246,232,0.78);
+    --ink-faint:rgba(255,246,232,0.52);
+    --rule:rgba(255,246,232,0.18);
+    --rule-strong:rgba(255,246,232,0.45);
+    --brass:#D9A441;
+    --display:Eczar,Georgia,serif;
+    --body:Karla,system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --scene-h:42.4vw;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--artbg); color:var(--ink); }
+  body{ font-family:var(--body); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+
+  /* Page art: 2:1 scene pinned at the top, fading into the bookshelf border,
+     which repeats down the left side however long the page grows. */
+  .page{ position:relative; isolation:isolate; min-height:100vh; overflow:hidden;
+    background:
+      linear-gradient(rgba(0,0,0,0.22),rgba(0,0,0,0.22)),
+      linear-gradient(to bottom, var(--artbg) calc(var(--scene-h) - 1vw), transparent calc(var(--scene-h) + 1px)),
+      url('shelf.webp') left 35.2vw / 30% auto repeat-y,
+      var(--artbg); }
+  .page::before{ content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:url('scene.jpg') left top / 100% auto no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,#000 calc(var(--scene-h)*0.72),transparent var(--scene-h));
+            mask-image:linear-gradient(to bottom,#000 calc(var(--scene-h)*0.72),transparent var(--scene-h)); }
+  .page::after{ content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:
+      linear-gradient(to left, rgba(18,10,8,0.9) 0%, rgba(18,10,8,0.72) 42%, rgba(18,10,8,0.12) 72%, transparent 100%),
+      linear-gradient(color-mix(in srgb, var(--tint) 18%, transparent), color-mix(in srgb, var(--tint) 18%, transparent)); }
+
+  .wrap{ position:relative; max-width:600px; margin-left:auto; margin-right:clamp(20px,6vw,96px); padding:clamp(48px,7vw,96px) 0 80px; }
+
+  .eyebrow{ font-family:var(--body); font-weight:500; font-size:13px; letter-spacing:0.34em; text-transform:uppercase; color:var(--ink-dim); }
+  h1{ font-family:var(--display); font-weight:700; font-size:clamp(44px,6vw,76px); line-height:0.95; margin:14px 0 22px; }
+  .quote{ margin:0 0 30px; max-width:36ch; }
+  .quote blockquote{ margin:0; }
+  .quote p{ font-family:var(--display); font-weight:500; font-style:italic; font-size:18px; line-height:1.5; color:var(--ink-dim); margin:0; }
+  .quote figcaption{ margin-top:8px; font-family:var(--mono); font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); }
+  .lede{ font-size:17px; color:var(--ink-dim); max-width:46ch; margin:0 0 56px; }
+
+  .label{ display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 18px; }
+  .label::after{ content:''; flex:1; height:1px; background:var(--rule); }
+  .label.brass{ color:var(--brass); }
+  section{ margin:0 0 56px; }
+
+  .entry{ padding:20px 0; border-bottom:1px solid var(--rule); }
+  .entry:first-of-type{ padding-top:4px; }
+  .entry h3{ font-family:var(--display); font-weight:500; font-size:22px; margin:0 0 4px; }
+  .entry h3 a{ text-decoration:none; border-bottom:1px solid var(--rule-strong); }
+  .entry h3 a:hover{ border-bottom-color:var(--ink); }
+  .byline{ font-size:13px; color:var(--ink-faint); margin:0 0 8px; }
+  .desc{ font-size:15.5px; color:var(--ink-dim); margin:0; }
+  .credit{ font-family:var(--mono); font-size:11.5px; letter-spacing:0.04em; color:var(--ink-faint); margin:10px 0 0; }
+  .credit a{ color:var(--ink-dim); text-decoration:none; border-bottom:1px solid var(--rule-strong); }
+
+  /* Contributors: profile cards. Photo optional; initials stand in. */
+  .people{ display:grid; gap:16px; }
+  .person{ display:flex; gap:18px; align-items:flex-start; padding:18px; border:1px solid var(--rule); border-radius:4px; background:rgba(20,10,8,0.45); }
+  .avatar{ flex:0 0 72px; width:72px; height:72px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--tint) 70%, #000); border:1px solid var(--rule-strong); font-family:var(--display); font-size:24px; color:var(--ink); }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .person h4{ font-family:var(--display); font-weight:500; font-size:19px; margin:0; }
+  .person .handle{ font-family:var(--mono); font-size:12px; color:var(--ink-faint); }
+  .person .bio{ font-size:14.5px; color:var(--ink-dim); margin:6px 0 8px; }
+  .person .links{ font-family:var(--mono); font-size:11.5px; letter-spacing:0.04em; }
+  .person .links a{ text-decoration:none; border-bottom:1px solid var(--rule-strong); color:var(--ink-dim); }
+  .person.open{ border-style:dashed; background:transparent; }
+  .person.open .avatar{ background:transparent; border-style:dashed; color:var(--ink-faint); font-size:28px; }
+  .person.open h4{ color:var(--ink-dim); }
+
+  .slot{ padding:16px 18px; border:1px dashed var(--rule-strong); border-radius:4px; color:var(--ink-faint); font-style:italic; font-size:14.5px; margin:0 0 10px; }
+
+  .help p{ font-size:15.5px; color:var(--ink-dim); margin:0 0 14px; max-width:46ch; }
+  .pill{ display:inline-flex; align-items:center; padding:12px 20px; border:1.5px solid rgba(255,246,232,0.5); border-radius:999px; font-size:15px; letter-spacing:0.02em; text-decoration:none; transition:border-color 150ms, background 150ms; }
+  .pill:hover{ border-color:var(--ink); background:rgba(255,246,232,0.1); }
+
+  .fine{ font-size:12.5px; color:var(--ink-faint); max-width:52ch; border-top:1px solid var(--rule); padding-top:20px; margin:0; }
+  .home{ display:inline-block; margin-top:22px; font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); text-decoration:none; }
+  .home:hover{ color:var(--ink); }
+
+  /* Phones: scene becomes a band across the top, text runs below it. */
+  @media (max-width:819px){
+    .page{ background:var(--artbg); }
+    .page::before{ bottom:auto; height:50vw; background-size:cover; background-position:left center; -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent); mask-image:linear-gradient(to bottom,#000 70%,transparent); }
+    .page::after{ display:none; }
+    .wrap{ margin:0; max-width:none; padding:calc(50vw + 12px) 20px 64px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="wrap">
+    <div class="eyebrow">Frosted Pane Press</div>
+    <h1>Resources</h1>
+    <figure class="quote">
+      <blockquote><p>Something there is that doesn’t love a wall.</p></blockquote>
+      <figcaption>Robert Frost</figcaption>
+    </figure>
+    <p class="lede">Tools and services for independent authors, recommended by people who use them. Every listing is credited to the writer who suggested it.</p>
+
+    <section>
+      <div class="label">Resources</div>
+      <div class="entry">
+        <h3><a href="https://www.myidentifiers.com" target="_blank" rel="noopener">Bowker</a></h3>
+        <p class="byline">Bowker — ISBN registration &amp; book metadata, U.S.</p>
+        <p class="desc">The U.S. ISBN agency, and the source record for a title's core metadata — publisher, format, and publication date all originate here before they propagate out to retailers and libraries.</p>
+      </div>
+      <div class="entry">
+        <h3><a href="https://www.literatureandlatte.com/scrivener/overview" target="_blank" rel="noopener">Scrivener</a></h3>
+        <p class="byline">Literature &amp; Latte — writing &amp; outlining software, Mac/Windows</p>
+        <p class="desc">Corkboard and outline views make it easy to draft out of order and rearrange scenes later, then export clean into Word or straight into formatting.</p>
+      </div>
+      <div class="entry">
+        <h3><a href="https://vellum.pub" target="_blank" rel="noopener">Vellum</a></h3>
+        <p class="byline">Vellum Software — ebook &amp; print formatting, macOS only</p>
+        <p class="desc">Turns a manuscript into a clean, professional ebook and print file without touching code. Mac only, so see Atticus below if you're on Windows.</p>
+        <p class="credit">Recommended by <a href="https://www.instagram.com/alexthaneauthor/" target="_blank" rel="noopener">Alex Thane</a></p>
+      </div>
+      <div class="entry">
+        <h3><a href="https://www.atticus.io" target="_blank" rel="noopener">Atticus</a></h3>
+        <p class="byline">Atticus — ebook &amp; print formatting, browser-based (Windows/Mac/Linux)</p>
+        <p class="desc">The closest cross-platform equivalent to Vellum. Runs in the browser, so there's nothing to install, and works the same regardless of your operating system.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="label">Contributors</div>
+      <div class="people">
+        <div class="person">
+          <div class="avatar" aria-hidden="true">AT</div>
+          <div>
+            <h4>Alex Thane</h4>
+            <div class="handle">@alexthaneauthor</div>
+            <p class="bio">Author of the novel <em>Days</em>. Writes literary fiction about time, memory and the people who stay.</p>
+            <div class="links"><a href="https://www.instagram.com/alexthaneauthor/" target="_blank" rel="noopener">Instagram</a> · <a href="https://alexthane.com" target="_blank" rel="noopener">alexthane.com</a></div>
+          </div>
+        </div>
+        <div class="person open">
+          <div class="avatar" aria-hidden="true">+</div>
+          <div>
+            <h4>Your name here</h4>
+            <p class="bio">Recommend a tool or service you actually use. Your credit includes a photo, a three-line bio and a link of your choice.</p>
+            <div class="links"><a href="mailto:contact@frostedpane.com?subject=Resource%20recommendation">Suggest a resource</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="label brass">Paid Slots — 0 / 3 filled</div>
+      <p class="slot">Open slot. Clearly labeled as paid. Ask below to inquire.</p>
+    </section>
+
+    <section class="help">
+      <div class="label">How can we help you?</div>
+      <p>Have a tool, teacher, or community Frosted Pane Press should know about? Tell us.</p>
+      <a class="pill" href="mailto:contact@frostedpane.com">contact@frostedpane.com</a>
+    </section>
+
+    <p class="fine">Listings are recommendations from working writers, not endorsements or guarantees. Paid slots are always labeled. We may edit or remove any listing at any time.</p>
+    <a class="home" href="/">← Frosted Pane Press</a>
+  </div>
+</main>
+</body>
+</html>
