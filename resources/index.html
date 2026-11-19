@@ -190,7 +190,7 @@
 <script>
 /* Rotating quote: one is picked at random on each visit. All are public domain. */
 (function(){
-  var Q = [["Something there is that doesn’t love a wall.", "Robert Frost"], ["“Hope” is the thing with feathers.", "Emily Dickinson"], ["Write while the heat is in you.", "Henry David Thoreau"], ["The pen is mightier than the sword.", "Edward Bulwer-Lytton"], ["I declare after all there is no enjoyment like reading!", "Jane Austen"]];
+  var Q = [["Something there is that doesn’t love a wall.", "Robert Frost"], ["“Hope” is the thing with feathers.", "Emily Dickinson"], ["Write while the heat is in you.", "Henry David Thoreau"], ["The pen is mightier than the sword.", "Edward Bulwer-Lytton"], ["I declare after all there is no enjoyment like reading!", "Jane Austen"], ["Gehen Sie in sich.", "Rainer Maria Rilke"]];
   var fig = document.querySelector('figure.quote'); if (!fig) return;
   var pick = Q[Math.floor(Math.random() * Q.length)];
   fig.querySelector('p').textContent = pick[0];
