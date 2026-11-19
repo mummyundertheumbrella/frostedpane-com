@@ -56,8 +56,8 @@
   h1{ font-family:var(--display); font-weight:700; font-size:clamp(44px,6vw,76px); line-height:0.95; margin:14px 0 22px; }
   .quote{ margin:0 0 30px; max-width:36ch; }
   .quote blockquote{ margin:0; }
-  .quote p{ font-family:var(--display); font-weight:500; font-style:italic; font-size:18px; line-height:1.5; color:var(--ink-dim); margin:0; }
-  .quote figcaption{ margin-top:8px; font-family:var(--mono); font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); }
+  .quote p{ font-family:var(--display); font-weight:500; font-style:italic; font-size:18px; line-height:1.5; color:#E9977F; margin:0; }
+  .quote figcaption{ margin-top:8px; font-family:var(--mono); font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, #E9977F 55%, var(--ink-faint)); }
   .lede{ font-size:17px; color:var(--ink-dim); max-width:46ch; margin:0 0 56px; }
 
   .label{ display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 18px; }
@@ -187,5 +187,15 @@
     <a class="parent" href="https://mummyundertheumbrella.com/">A Mummy Under the Umbrella company</a>
   </div>
 </main>
+<script>
+/* Rotating quote: one is picked at random on each visit. All are public domain. */
+(function(){
+  var Q = [["Something there is that doesn’t love a wall.", "Robert Frost"], ["“Hope” is the thing with feathers.", "Emily Dickinson"], ["Write while the heat is in you.", "Henry David Thoreau"], ["The pen is mightier than the sword.", "Edward Bulwer-Lytton"], ["I declare after all there is no enjoyment like reading!", "Jane Austen"]];
+  var fig = document.querySelector('figure.quote'); if (!fig) return;
+  var pick = Q[Math.floor(Math.random() * Q.length)];
+  fig.querySelector('p').textContent = pick[0];
+  fig.querySelector('figcaption').textContent = pick[1];
+})();
+</script>
 </body>
 </html>
