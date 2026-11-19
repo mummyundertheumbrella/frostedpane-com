@@ -199,7 +199,9 @@
   try { localStorage.setItem(key, String(i)); } catch (e) {}
   var pick = Q[i];
   fig.querySelector('p').textContent = pick[0];
-  fig.querySelector('figcaption').textContent = pick[1];
+  var cap = fig.querySelector('figcaption'), a = document.createElement('a');
+  a.href = 'https://mummyundertheumbrella.com/quotes.html#books'; a.textContent = pick[1]; a.style.color = 'inherit';
+  cap.textContent = ''; cap.appendChild(a);
 })();
 </script>
 </body>
