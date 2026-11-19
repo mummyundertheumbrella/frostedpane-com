@@ -190,9 +190,14 @@
 <script>
 /* Rotating quote: one is picked at random on each visit. All are public domain. */
 (function(){
-  var Q = [["Something there is that doesn’t love a wall.", "Robert Frost"], ["“Hope” is the thing with feathers.", "Emily Dickinson"], ["Write while the heat is in you.", "Henry David Thoreau"], ["The pen is mightier than the sword.", "Edward Bulwer-Lytton"], ["I declare after all there is no enjoyment like reading!", "Jane Austen"], ["Gehen Sie in sich.", "Rainer Maria Rilke"]];
+  var Q = [["Something there is that doesn’t love a wall.", "Robert Frost"], ["Write while the heat is in you.", "Henry David Thoreau"], ["I declare after all there is no enjoyment like reading!", "Jane Austen"], ["Gehen Sie in sich.", "Rainer Maria Rilke"], ["The difference between the almost right word and the right word is really a large matter—it’s the difference between the lightning-bug and the lightning.", "Mark Twain"], ["A good book is the precious life-blood of a master spirit.", "John Milton"], ["Books are the quietest and most constant of friends.", "Charles W. Eliot"], ["Words are, of course, the most powerful drug used by mankind.", "Rudyard Kipling"], ["Le style est l’homme même.", "Buffon"], ["There is no such thing as a moral or an immoral book. Books are well written, or badly written. That is all.", "Oscar Wilde"], ["“Classic.” A book which people praise and don’t read.", "Mark Twain"], ["Books are the treasured wealth of the world and the fit inheritance of generations and nations.", "Henry David Thoreau"]];
   var fig = document.querySelector('figure.quote'); if (!fig) return;
-  var pick = Q[Math.floor(Math.random() * Q.length)];
+  var key = 'mummy-quote-books', last = -1, i;
+  try { last = parseInt(localStorage.getItem(key), 10); } catch (e) {}
+  do { i = Math.floor(Math.random() * Q.length); }
+  while (Q.length > 1 && i === last);
+  try { localStorage.setItem(key, String(i)); } catch (e) {}
+  var pick = Q[i];
   fig.querySelector('p').textContent = pick[0];
   fig.querySelector('figcaption').textContent = pick[1];
 })();
